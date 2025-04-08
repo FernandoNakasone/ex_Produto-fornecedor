@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 import static javax.swing.JOptionPane.*;
@@ -63,7 +64,23 @@ public class Util {
     }
 
     private void pesquisarProduto(){
+        String nome, aux;
+        DecimalFormat fM = new DecimalFormat("R$0.00");
 
+        nome = showInputDialog("Informe o nome do Produto:");
+        aux = "Produto não encontrado";
+
+        for(int i=0; i<idxProduto; i++){
+            if(produto[i].getNome().equalsIgnoreCase(nome)){
+                aux = "";
+                aux += nome + " Encontrado \n";
+                aux += "Valor unitario: " + fM.format(produto[i].getPreco());
+                aux += "\nQuantidade no estoque: " + produto[i].getQtdEstoque();
+                aux += "\nFornecedor: " + produto[i].getFornecedor().getNome();
+            }
+        }
+
+        showMessageDialog(null,aux);
     }
 
     private Fornecedor pesquisarFornecedor(){
@@ -71,6 +88,7 @@ public class Util {
 
         for (int i=0; i < idxFornecedor; i++){
             if(cnpj == fornecedor[i].getCnpj()){
+                showMessageDialog(null,"Fornecedor encontrado");
                 return fornecedor[i];
             }
         }
