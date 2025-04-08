@@ -36,7 +36,7 @@ public class Util {
                     break;
 
                 case 3:
-                    pesquisarFornecedor();
+                    pesquisar();
                     break;
             }
         } while (opcao != 4);
@@ -88,7 +88,6 @@ public class Util {
 
         for (int i=0; i < idxFornecedor; i++){
             if(cnpj == fornecedor[i].getCnpj()){
-                showMessageDialog(null,"Fornecedor encontrado");
                 return fornecedor[i];
             }
         }
@@ -105,6 +104,16 @@ public class Util {
 
         fornecedor[idxFornecedor] = new Fornecedor(nome, cnpj);
         return fornecedor[idxFornecedor];
+    }
+
+    private void pesquisar(){
+        Fornecedor fornecedor = pesquisarFornecedor();
+
+        if (fornecedor != null){
+            showMessageDialog(null, "Nome:" + fornecedor.getNome() + "\nCNPJ:" +
+                    fornecedor.getCnpj());
+        }
+
     }
 
 }
